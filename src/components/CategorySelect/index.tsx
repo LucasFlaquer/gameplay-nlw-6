@@ -25,7 +25,7 @@ export function CategorySelect({categorySelected, setCategory, hasCheckBox=false
           title={category.title}
           checked={category.id === categorySelected}
           onPress={()=> setCategory(category.id)}
-          hasCheckBox={false} />
+          hasCheckBox={hasCheckBox} />
       ))}
     </ScrollView>
       

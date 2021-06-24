@@ -1,38 +1,34 @@
-import { Image, Modal, ModalProps, Text, TouchableOpacity, TouchableOpacityProps, View } from 'react-native';
+import { Modal, ModalProps, TouchableWithoutFeedback, View } from 'react-native';
 import React, { ReactNode } from 'react'
 
 import { Background } from '../Background';
-import { style } from '../../screens/SignIn/styles';
 import {styles} from './styles'
 
-export type GuildProps = {
-  id: string
-  name: string
-  icon: string | null
-  owner: boolean
-}
-
 type Props = ModalProps & {
-  children: ReactNode
+  children: ReactNode,
+  closeModal: ()=>void
 }
 
 
-export function ModalView({children, ...rest}:Props) {
+export function ModalView({children, closeModal,...rest}:Props) {
    
   return (
     <Modal
       transparent
       animationType="slide"
+      statusBarTranslucent
       {...rest}
     >
-      <View style={styles.overlay}>
-        <View style={styles.container}>
-          <Background>
-            <View style={styles.bar} />
-            {children}
-          </Background>
+      <TouchableWithoutFeedback onPress={closeModal}>
+        <View style={styles.overlay}>
+          <View style={styles.container}>
+            <Background>
+              <View style={styles.bar} />
+              {children}
+            </Background>
+          </View>
         </View>
-      </View>
+      </TouchableWithoutFeedback>
     </Modal>
   )
 }

@@ -24,7 +24,7 @@ export function Guild({data, ...rest}:Props) {
   return (
     // <Image source={{uri}} style={styles.image} resizeMode="cover" />
     <TouchableOpacity style={styles.container} {...rest}>
-      <GuildIcon  />
+      <GuildIcon guildId={data.id} iconId={data.icon} />
       <View style={styles.content}>
         <View>
           <Text style={styles.title}>{data.name}</Text>

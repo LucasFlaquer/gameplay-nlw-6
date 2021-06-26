@@ -1,6 +1,10 @@
-import React, { useCallback, useState } from 'react'
-import { FlatList, View } from 'react-native'
-import { useFocusEffect, useNavigation } from '@react-navigation/native'
+import React, { useCallback, useEffect, useState } from 'react'
+import { BackHandler, FlatList, View } from 'react-native'
+import {
+  useFocusEffect,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import { Appointment, AppointmentProps } from '../../components/Appointment'
@@ -13,11 +17,15 @@ import { ListHeader } from '../../components/ListHeader'
 import { Loading } from '../../components/Loading'
 import { Profile } from '../../components/Profile'
 import { styles } from './styles'
+import { ModalView } from '../../components/ModalView'
+import { Exit } from '../Exit'
 
 export function Home() {
+  const route = useRoute()
+  const navigation = useNavigation()
+  const [openExitModal, setOpenExitModal] = useState(false)
   const [category, setCategory] = useState('')
   const [loading, setLoading] = useState(true)
-  const navigation = useNavigation()
   const [appointments, setAppointments] = useState<AppointmentProps[]>([])
 
   function handleCategorySelect(categoryId: string) {
@@ -25,6 +33,7 @@ export function Home() {
   }
 
   function handleApointmentDetails(guildSelected: AppointmentProps) {
+    // BackHandler.removeEventListener('hardwareBackPress', backAction)
     navigation.navigate('AppointmentDetails', { guildSelected })
   }
   function handleApointmentCreate() {
@@ -41,6 +50,21 @@ export function Home() {
     }
     setLoading(false)
   }
+  function handleCloseExitModal() {
+    setOpenExitModal(false)
+  }
+
+  const backAction = () => {
+    setOpenExitModal(true)
+
+    return true
+  }
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', backAction)
+
+    return () =>
+      BackHandler.removeEventListener('hardwareBackPress', backAction)
+  }, [])
 
   useFocusEffect(
     useCallback(() => {
@@ -49,39 +73,48 @@ export function Home() {
   )
 
   return (
-    <Background>
-      <View style={styles.header}>
-        <Profile />
-        <ButtonAdd onPress={handleApointmentCreate} />
-      </View>
-      <CategorySelect
-        categorySelected={category}
-        setCategory={handleCategorySelect}
-      />
-      {loading ? (
-        <Loading />
-      ) : (
-        <>
-          <ListHeader
-            title='Partidas Agendadas'
-            subtitle={`Total ${appointments.length}`}
-          />
-          <FlatList
-            data={appointments}
-            keyExtractor={(item) => item.id}
-            style={styles.matches}
-            showsHorizontalScrollIndicator={false}
-            ItemSeparatorComponent={ListDivider}
-            contentContainerStyle={{ paddingBottom: 69 }}
-            renderItem={({ item }) => (
-              <Appointment
-                data={item}
-                onPress={() => handleApointmentDetails(item)}
-              />
-            )}
-          />
-        </>
-      )}
-    </Background>
+    <>
+      <Background>
+        <View style={styles.header}>
+          <Profile />
+          <ButtonAdd onPress={handleApointmentCreate} />
+        </View>
+        <CategorySelect
+          categorySelected={category}
+          setCategory={handleCategorySelect}
+        />
+        {loading ? (
+          <Loading />
+        ) : (
+          <>
+            <ListHeader
+              title='Partidas Agendadas'
+              subtitle={`Total ${appointments.length}`}
+            />
+            <FlatList
+              data={appointments}
+              keyExtractor={(item) => item.id}
+              style={styles.matches}
+              showsHorizontalScrollIndicator={false}
+              ItemSeparatorComponent={ListDivider}
+              contentContainerStyle={{ paddingBottom: 69 }}
+              renderItem={({ item }) => (
+                <Appointment
+                  data={item}
+                  onPress={() => handleApointmentDetails(item)}
+                />
+              )}
+            />
+          </>
+        )}
+      </Background>
+      <ModalView
+        visible={openExitModal}
+        closeModal={handleCloseExitModal}
+        height={600}
+      >
+        <Exit />
+      </ModalView>
+    </>
   )
 }

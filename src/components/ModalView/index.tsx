@@ -1,29 +1,30 @@
-import { Modal, ModalProps, TouchableWithoutFeedback, View } from 'react-native';
+import { Modal, ModalProps, TouchableWithoutFeedback, View } from 'react-native'
 import React, { ReactNode } from 'react'
 
-import { Background } from '../Background';
-import {styles} from './styles'
+import { Background } from '../Background'
+import { styles } from './styles'
 
 type Props = ModalProps & {
-  children: ReactNode,
-  closeModal: ()=>void
+  children: ReactNode
+  height?: number
+  closeModal: () => void
 }
 
-
-export function ModalView({children, closeModal,...rest}:Props) {
-   
+export function ModalView({
+  children,
+  closeModal,
+  height = 0,
+  ...rest
+}: Props) {
   return (
-    <Modal
-      transparent
-      animationType="slide"
-      statusBarTranslucent
-      {...rest}
-    >
+    <Modal transparent animationType='slide' statusBarTranslucent {...rest}>
       <TouchableWithoutFeedback onPress={closeModal}>
         <View style={styles.overlay}>
-          <View style={styles.container}>
+          <View
+            style={[styles.container, height > 0 ? { marginTop: height } : {}]}
+          >
             <Background>
-              <View style={styles.bar} />
+              {height === 0 && <View style={styles.bar} />}
               {children}
             </Background>
           </View>

@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from 'react'
 import {
   BackHandler,
   KeyboardAvoidingView,
@@ -5,15 +6,16 @@ import {
   Text,
   View,
 } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import uuid from 'react-native-uuid'
 import { RectButton, ScrollView } from 'react-native-gesture-handler'
-
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { Feather } from '@expo/vector-icons'
+import { useNavigation } from '@react-navigation/native'
+
 import { Background } from '../../components/Background'
 import { Button } from '../../components/Button'
 import { COLLECTION_APPOINTMENTS } from '../../configs/database'
 import { CategorySelect } from '../../components/CategorySelect'
-import { Feather } from '@expo/vector-icons'
 import { GuildIcon } from '../../components/GuildIcon'
 import { GuildProps } from '../../components/Guild'
 import { Guilds } from '../Guilds'
@@ -21,18 +23,14 @@ import { Header } from '../../components/Header'
 import { ModalView } from '../../components/ModalView'
 import { SmallInput } from '../../components/SmallInput'
 import { TextArea } from '../../components/TextArea'
-import { style } from '../SignIn/styles'
-import { styles } from './styles'
 import { theme } from '../../global/styles/theme'
-import { useNavigation } from '@react-navigation/native'
-import uuid from 'react-native-uuid'
+import { styles } from './styles'
 
 export function AppointmentCreate() {
   const navigation = useNavigation()
   const [category, setCategory] = useState('')
   const [openGuildsModal, setOpenGuildsModal] = useState(false)
   const [guild, setGuild] = useState<GuildProps>({} as GuildProps)
-
   const [day, setDay] = useState('')
   const [month, setMonth] = useState('')
   const [hour, setHour] = useState('')

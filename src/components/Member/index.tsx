@@ -1,13 +1,10 @@
-import { RectButton, RectButtonProps } from 'react-native-gesture-handler'
-import {Text, View} from 'react-native'
-
-import { Avatar } from '../Avatar';
-import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react'
-import {SvgProps}from 'react-native-svg'
-import { style } from '../../screens/SignIn/styles';
+import { Text, View } from 'react-native'
+
+import { Avatar } from '../Avatar'
+
+import { theme } from '../../global/styles/theme'
 import { styles } from './styles'
-import { theme } from '../../global/styles/theme';
 
 export type MemberProps = {
   id: string
@@ -20,20 +17,21 @@ type Props = {
   data: MemberProps
 }
 
-export function Member({data}: Props) {
+export function Member({ data }: Props) {
   const isOnline = data.status === 'online'
-  const {on, primary} = theme.colors
+  const { on, primary } = theme.colors
   return (
     <View style={styles.container}>
-      <Avatar urlImage={data.avatar_url}/>
+      <Avatar urlImage={data.avatar_url} />
 
       <View>
         <Text style={styles.title}>{data.username}</Text>
         <View style={styles.status}>
-          <View 
+          <View
             style={[
-              styles.bulletStatus, 
-              {backgroundColor: isOnline ? on : primary }]} 
+              styles.bulletStatus,
+              { backgroundColor: isOnline ? on : primary },
+            ]}
           />
           <Text style={styles.nameStatus}>
             {isOnline ? 'Disponível' : 'Ocupado'}

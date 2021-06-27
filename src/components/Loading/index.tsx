@@ -1,18 +1,13 @@
-import { ActivityIndicator, View } from 'react-native';
-
 import React from 'react'
+import { ActivityIndicator, View } from 'react-native'
+
+import { theme } from '../../global/styles/theme'
 import { styles } from './styles'
-import { theme } from '../../global/styles/theme';
 
-type Props =  {
-  
-}
-
-export function Loading({}: Props) {
-  
+export function Loading() {
   return (
-    <View style={styles.container}> 
-      <ActivityIndicator size="large" color={theme.colors.primary} />
-    </View>    
+    <View style={styles.container}>
+      <ActivityIndicator size='large' color={theme.colors.primary} />
+    </View>
   )
 }

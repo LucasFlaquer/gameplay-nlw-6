@@ -1,17 +1,17 @@
-import {Image, Text, View} from 'react-native'
+import React from 'react'
+import { Text } from 'react-native'
 import { RectButton, RectButtonProps } from 'react-native-gesture-handler'
 
-import React from 'react'
 import { styles } from './style'
 
-type Props = RectButtonProps &{
+type Props = RectButtonProps & {
   title: string
 }
 
-export function Button({title, ...rest}:Props) {
+export function Button({ title, ...rest }: Props) {
   return (
-   <RectButton style={styles.container} {...rest}>
+    <RectButton style={styles.container} {...rest}>
       <Text style={styles.title}>{title}</Text>
-   </RectButton>
+    </RectButton>
   )
 }

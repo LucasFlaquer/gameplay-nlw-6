@@ -1,23 +1,23 @@
-import { StyleSheet } from "react-native";
-import { theme } from "../../global/styles/theme";
+import { StyleSheet } from 'react-native'
+import { theme } from '../../global/styles/theme'
 
-export const styles  = StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
   label: {
     fontSize: 18,
     fontFamily: theme.fonts.title700,
-    color: theme.colors.heading
+    color: theme.colors.heading,
   },
   caracteresLimit: {
     color: theme.colors.highlight,
     fontSize: 13,
-    fontFamily: theme.fonts.text400
+    fontFamily: theme.fonts.text400,
   },
   form: {
     paddingHorizontal: 24,
-    marginTop: 32
+    marginTop: 32,
   },
   select: {
     width: '100%',
@@ -28,7 +28,7 @@ export const styles  = StyleSheet.create({
     borderRadius: 8,
     alignItems: 'center',
     paddingRight: 25,
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
   selectBody: {
     flex: 1,
@@ -40,7 +40,7 @@ export const styles  = StyleSheet.create({
     backgroundColor: theme.colors.secondary40,
     borderColor: theme.colors.secondary50,
     borderRadius: 8,
-    borderWidth: 1
+    borderWidth: 1,
   },
   field: {
     width: '100%',
@@ -56,12 +56,10 @@ export const styles  = StyleSheet.create({
     marginRight: 4,
     fontSize: 15,
     fontFamily: theme.fonts.text500,
-    color: theme.colors.highlight
+    color: theme.colors.highlight,
   },
   footer: {
     marginVertical: 20,
-    marginBottom: 56
-
-  }
-  
+    marginBottom: 56,
+  },
 })

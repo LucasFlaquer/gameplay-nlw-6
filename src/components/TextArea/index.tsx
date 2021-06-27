@@ -1,16 +1,8 @@
-import { TextInput, TextInputProps, View } from 'react-native'
-
 import React from 'react'
-import { RectButtonProps, } from 'react-native-gesture-handler'
-import { styles } from './styles'
-import { theme } from '../../global/styles/theme'
+import { TextInput, TextInputProps } from 'react-native'
 
-export function TextArea({...rest}:TextInputProps) {
-  return (
-   <TextInput
-    style={styles.container}
-    
-    {...rest}
-   />
-  )
+import { styles } from './styles'
+
+export function TextArea({ ...rest }: TextInputProps) {
+  return <TextInput style={styles.container} {...rest} />
 }

@@ -1,10 +1,12 @@
-import { Text, View } from 'react-native'
 import React from 'react'
+import { Text, View } from 'react-native'
+import { RectButton } from 'react-native-gesture-handler'
 
 import { Avatar } from '../Avatar'
-import { RectButton } from 'react-native-gesture-handler'
-import { styles } from './styles'
+
 import { useAuth } from '../../hooks/auth'
+
+import { styles } from './styles'
 
 export function Profile() {
   const { user } = useAuth()

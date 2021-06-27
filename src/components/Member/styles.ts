@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native'
+import { StyleSheet } from 'react-native'
 import { theme } from '../../global/styles/theme'
 
 export const styles = StyleSheet.create({
@@ -7,7 +7,6 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  
   title: {
     fontFamily: theme.fonts.title700,
     color: theme.colors.heading,
@@ -21,11 +20,11 @@ export const styles = StyleSheet.create({
     width: 8,
     height: 8,
     borderRadius: 4,
-    marginRight: 9
+    marginRight: 9,
   },
   nameStatus: {
     fontFamily: theme.fonts.text400,
     color: theme.colors.highlight,
     fontSize: 13,
-  }
+  },
 })

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { BackHandler, FlatList, View } from 'react-native'
+import { BackHandler, Dimensions, FlatList, View } from 'react-native'
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
@@ -18,6 +18,7 @@ import { Exit } from '../Exit'
 import { styles } from './styles'
 
 export function Home() {
+  const windowHeight = Dimensions.get('window').height
   const navigation = useNavigation()
   const [openExitModal, setOpenExitModal] = useState(false)
   const [category, setCategory] = useState('')
@@ -106,9 +107,9 @@ export function Home() {
       <ModalView
         visible={openExitModal}
         closeModal={handleCloseExitModal}
-        height={600}
+        height={windowHeight - 120}
       >
-        <Exit />
+        <Exit closeModal={handleCloseExitModal} />
       </ModalView>
     </>
   )

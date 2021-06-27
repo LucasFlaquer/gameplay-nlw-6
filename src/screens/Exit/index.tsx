@@ -3,10 +3,19 @@ import { Text, View } from 'react-native'
 
 import { Button } from '../../components/Button'
 import { ButtonOutline } from '../../components/ButtonOutline'
+import { useAuth } from '../../hooks/auth'
 
 import { styles } from './styles'
 
-export function Exit() {
+type Props = {
+  closeModal: () => void
+}
+
+export function Exit({ closeModal }: Props) {
+  const { signOut } = useAuth()
+  function handleSignOut() {
+    signOut()
+  }
   return (
     <View style={styles.exitModal}>
       <View style={styles.titleContainer}>
@@ -17,10 +26,10 @@ export function Exit() {
       </View>
       <View style={styles.buttonsContainer}>
         <View style={styles.buttonWrapper}>
-          <ButtonOutline title='Não' />
+          <ButtonOutline title='Não' onPress={closeModal} />
         </View>
         <View style={styles.buttonWrapper}>
-          <Button title='Sim' />
+          <Button title='Sim' onPress={handleSignOut} />
         </View>
       </View>
     </View>

@@ -6,7 +6,7 @@ import { styles } from './styles'
 
 type Props = ModalProps & {
   children: ReactNode
-  height?: number
+  height?: number | string
   closeModal: () => void
 }
 
@@ -16,9 +16,12 @@ export function ModalView({
   height = 0,
   ...rest
 }: Props) {
+  function handleOutClick() {
+    closeModal()
+  }
   return (
     <Modal transparent animationType='slide' statusBarTranslucent {...rest}>
-      <TouchableWithoutFeedback onPress={closeModal}>
+      <TouchableWithoutFeedback onPress={handleOutClick}>
         <View style={styles.overlay}>
           <View
             style={[styles.container, height > 0 ? { marginTop: height } : {}]}

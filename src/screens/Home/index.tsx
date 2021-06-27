@@ -107,7 +107,7 @@ export function Home() {
       <ModalView
         visible={openExitModal}
         closeModal={handleCloseExitModal}
-        height={windowHeight - 120}
+        height={windowHeight - 150}
       >
         <Exit closeModal={handleCloseExitModal} />
       </ModalView>
